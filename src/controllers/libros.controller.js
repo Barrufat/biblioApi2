@@ -26,6 +26,21 @@ export const getLibro = async (req, res) => {
   }
 };
 
+export const getCasilla = async (req, res) => {
+  try {
+    const { casilla } = req.params;
+    const [rows] = await pool.query("SELECT * FROM libros WHERE casilla = ?", [casilla]);
+
+    if (rows.length <= 0) {
+      return res.status(404).json({ message: "Libro not found" });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ message: "Something goes wrong" });
+  }
+};
+
 export const deleteLibro = async (req, res) => {
   try {
     const { id } = req.params;

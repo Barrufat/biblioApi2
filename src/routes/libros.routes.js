@@ -17,7 +17,7 @@ router.get("/libros", getLibros);
 router.get("/libros/:id", getLibro);
 
 // GET A Casilla
-router.get("/libros/:casilla", getCasilla);
+router.get("/libros/casilla/:casilla", getCasilla);
 
 // DELETE An Employee
 router.delete("/libros/:id", deleteLibro);

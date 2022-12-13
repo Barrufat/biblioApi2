@@ -41,6 +41,36 @@ export const getCasilla = async (req, res) => {
   }
 };
 
+export const getNombre = async (req, res) => {
+  try {
+    const { nombre } = req.params;
+    const [rows] = await pool.query("SELECT * FROM libros WHERE nombre  LIKE ‘%?%’ ", [nombre, ]);
+
+    if (rows.length <= 0) {
+      return res.status(404).json({ message: "Libro not found" });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ message: "Something goes wrong" });
+  }
+};
+
+export const getAutor = async (req, res) => {
+  try {
+    const { autorx } = req.params;
+    const [rows] = await pool.query("SELECT * FROM libros WHERE autorx LIKE ‘%?%’ ", [autorx, ]);
+
+    if (rows.length <= 0) {
+      return res.status(404).json({ message: "Libro not found" });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    return res.status(500).json({ message: "Something goes wrong" });
+  }
+};
+
 export const deleteLibro = async (req, res) => {
   try {
     const { id } = req.params;

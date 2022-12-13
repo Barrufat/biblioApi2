@@ -56,7 +56,7 @@ export const getNombre = async (req, res) => {
   }
 };
 
-export const getAutor = async (req, res) => {
+export const getAutorx = async (req, res) => {
   try {
     const { autorx } = req.params;
     const [rows] = await pool.query("SELECT * FROM libros WHERE autorx LIKE ‘%?%’ ", [autorx, ]);

@@ -4,7 +4,9 @@ import {
   deleteLibro,
   getLibro,
   getLibros,
-  getCasilla
+  getCasilla,
+  getAutorx,
+  getNombre
   // updateEmployee,
 } from "../controllers/libros.controller.js";
 
@@ -18,6 +20,8 @@ router.get("/libros/:id", getLibro);
 
 // GET A Casilla
 router.get("/libros/casilla/:casilla", getCasilla);
+router.get("/libros/autorx/:autorx", getAutorx);
+router.get("/libros/nombre/:nombre", getNombre);
 
 // DELETE An Employee
 router.delete("/libros/:id", deleteLibro);

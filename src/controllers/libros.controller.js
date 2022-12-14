@@ -44,7 +44,7 @@ export const getCasilla = async (req, res) => {
 export const getNombre = async (req, res) => {
   try {
     const { nombre } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE nombre  = ?’ ", [nombre,]);
+    const [rows] = await pool.query("SELECT * FROM libros WHERE nombre = ?", [nombre,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Libro not found" });
@@ -59,7 +59,7 @@ export const getNombre = async (req, res) => {
 export const getAutorx = async (req, res) => {
   try {
     const { autorx } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE autorx LIKE = ?", [autorx,]);
+    const [rows] = await pool.query("SELECT * FROM libros WHERE autorx = ?", [autorx,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Libro not found" });

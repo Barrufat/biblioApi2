@@ -29,7 +29,7 @@ export const getLibro = async (req, res) => {
 export const getCasilla = async (req, res) => {
   try {
     const { casilla } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE casilla = ?", [casilla, ]);
+    const [rows] = await pool.query("SELECT * FROM libros WHERE casilla = ?", [casilla,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Libro not found" });
@@ -44,7 +44,7 @@ export const getCasilla = async (req, res) => {
 export const getNombre = async (req, res) => {
   try {
     const { nombre } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE nombre  = ?’ ", [nombre, ]);
+    const [rows] = await pool.query("SELECT * FROM libros WHERE nombre  = ?’ ", [nombre,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Libro not found" });
@@ -59,7 +59,7 @@ export const getNombre = async (req, res) => {
 export const getAutorx = async (req, res) => {
   try {
     const { autorx } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE autorx LIKE = ?", [autorx, ]);
+    const [rows] = await pool.query("SELECT * FROM libros WHERE autorx LIKE = ?", [autorx,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Libro not found" });
@@ -87,10 +87,17 @@ export const deleteLibro = async (req, res) => {
 };
 
 export const createLibro = async (req, res) => {
-  Libro.create(req.body)
-      .then((item) => item.save())
-      .then((item) => res.json({ ok: true, data: item }))
-      .catch((error) => res.json({ ok: false, error }))
+  const { nombre, autorx, genero, sinopsis, imagen, casilla } = req.body
+  const [rows] = await pool.query('INSERT INTO libros (nombre, autorx, genero, sinopsis, imagen, casilla) VALUES (?, ?, ?, ?, ?, ?)', [nombre, autorx, genero, sinopsis, imagen, casilla])
+  res.send({
+    id:rows.insertId,
+    nombre,
+    autorx,
+    genero,
+    sinopsis,
+    imagen,
+    casilla
+  })
 };
 
 // export const updateLibros = async (req, res) => {

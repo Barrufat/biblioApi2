@@ -16,18 +16,18 @@ const router = Router();
 router.get("/libros", getLibros);
 
 // GET An Employee
-router.get("/libros/:id", getLibro);
+router.get("/:id", getLibro);
 
 // GET A Casilla
-router.get("/libros/casilla/:casilla", getCasilla);
-router.get("/libros/autorx/:autorx", getAutorx);
-router.get("/libros/nombre/:nombre", getNombre);
+router.get("/casilla/:casilla", getCasilla);
+router.get("/autorx/:autorx", getAutorx);
+router.get("/nombre/:nombre", getNombre);
 
 // DELETE An Employee
-router.delete("/libros/:id", deleteLibro);
+router.delete("/:id", deleteLibro);
 
 // INSERT An Employee
-router.post("/libros", createLibro);
+router.post("/", createLibro);
 
 // router.patch("/libros/:id", updateEmployee);
 

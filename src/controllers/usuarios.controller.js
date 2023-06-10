@@ -2,7 +2,7 @@ import { pool } from "../db.js";
 
 export const getUsuarios = async (req, res) => {
   try {
-    const [rows] = await pool.query("SELECT * FROM libros");
+    const [rows] = await pool.query("SELECT * FROM usuarios");
     res.json(rows);
   } catch (error) {
     return res.status(500).json({ message: "Something goes wrong" });
@@ -12,7 +12,7 @@ export const getUsuarios = async (req, res) => {
 export const getUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE id = ?", [
+    const [rows] = await pool.query("SELECT * FROM usuarios WHERE id = ?", [
       id,
     ]);
 
@@ -29,7 +29,7 @@ export const getUsuario = async (req, res) => {
 export const getNation = async (req, res) => {
   try {
     const { nation } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE nation = ?", [nation,]);
+    const [rows] = await pool.query("SELECT * FROM usuarios WHERE nation = ?", [nation,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Usuarios not found" });
@@ -44,7 +44,7 @@ export const getNation = async (req, res) => {
 export const getName = async (req, res) => {
   try {
     const { name } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE name = ?", [name,]);
+    const [rows] = await pool.query("SELECT * FROM usuarios WHERE name = ?", [name,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Usuario not found" });
@@ -59,7 +59,7 @@ export const getName = async (req, res) => {
 export const getRol = async (req, res) => {
   try {
     const { rol } = req.params;
-    const [rows] = await pool.query("SELECT * FROM libros WHERE rol = ?", [rol,]);
+    const [rows] = await pool.query("SELECT * FROM usuarios WHERE rol = ?", [rol,]);
 
     if (rows.length <= 0) {
       return res.status(404).json({ message: "Usuario not found" });
@@ -74,7 +74,7 @@ export const getRol = async (req, res) => {
 export const deleteUsuario = async (req, res) => {
   try {
     const { id } = req.params;
-    const [rows] = await pool.query("DELETE FROM libros WHERE id = ?", [id]);
+    const [rows] = await pool.query("DELETE FROM usuarios WHERE id = ?", [id]);
 
     if (rows.affectedRows <= 0) {
       return res.status(404).json({ message: "Libro not found" });
@@ -88,7 +88,7 @@ export const deleteUsuario = async (req, res) => {
 
 export const createUsuario = async (req, res) => {
   const { name, password, nation, rol } = req.body
-  const [rows] = await pool.query('INSERT INTO libros (name, password, nation, rol) VALUES (?, ?, ?, ?)', [name, password, nation, rol])
+  const [rows] = await pool.query('INSERT INTO usuarios (name, password, nation, rol) VALUES (?, ?, ?, ?)', [name, password, nation, rol])
   res.send({
     id:rows.insertId,
     name, 

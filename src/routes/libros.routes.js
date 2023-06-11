@@ -13,7 +13,7 @@ import {
 const router = Router();
 
 // GET all Employees
-router.get("/libros", getLibros);
+router.get("/", getLibros);
 
 // GET An Employee
 router.get("/:id", getLibro);
